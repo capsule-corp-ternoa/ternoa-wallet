@@ -1,5 +1,4 @@
-
-# Ternoa Wallet
+![Ternoa Wallet](./assets/logo_with_title.png)
 
 ## Introduction
 
