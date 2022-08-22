@@ -1,0 +1,32 @@
+{
+  "name": "dapp-exemple",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@polkadot/util": "^10.1.5",
+    "@polkadot/util-crypto": "^10.1.5",
+    "@walletconnect/legacy-modal": "2.0.0-beta.100",
+    "@walletconnect/sign-client": "2.0.0-beta.100",
+    "better-sqlite3": "^7.6.2",
+    "next": "12.2.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "overrides": {
+    "@walletconnect/sign-client": "2.0.0-beta.100",
+    "@walletconnect/core": "2.0.0-beta.100",
+    "@walletconnect/types": "2.0.0-beta.100",
+    "@walletconnect/utils": "2.0.0-beta.100",
+    "@walletconnect/legacy-modal": "2.0.0-beta.100"
+  },
+  "devDependencies": {
+    "eslint": "8.22.0",
+    "eslint-config-next": "12.2.5"
+  }
+}
