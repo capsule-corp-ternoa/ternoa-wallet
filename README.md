@@ -24,3 +24,6 @@ There are 3 different ways to integrate your dApp with Ternoa Wallet:
 
 If you are experiencing an issue with Ternoa Wallet, please visit the issues section. If the issue you are experiencing has not yet been reported, create a new issue.
 
+## Support
+
+For support, join our [Discord](https://discord.com/invite/cNZTGtGJNR), we are happy to help you.
