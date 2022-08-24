@@ -4,6 +4,7 @@ This is a step-by-step tutorial on how to integrate Wallet Connect to your dApp,
 
 Pre-requist: In this tutorial, we assume that you are familiar with es6. We will also use next.js with React.js, but no experience in the latter 2 is required.
 
+
 ### Project setup
 
 Let's get started with creating the project and installing the necessary dependecies.
@@ -23,36 +24,16 @@ In the package.json file and past the following. This will make sure that we alw
     "@walletconnect/types": "2.0.0-beta.100",
     "@walletconnect/utils": "2.0.0-beta.100",
     "@walletconnect/legacy-modal": "2.0.0-beta.100"
-  }
-```
+  },
 
-Create an ".env.local" file in the root directory and past
-```
-WALLET_CONNECT_DEFAULT_LOGGER=debug
-NEXT_PUBLIC_WALLET_CONNECT_RELAY_URL=wss://wallet-connectrelay.ternoa.network/
-NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=e8f6f7d41ff88cd96a21ce580f018401Ï
 ```
 
 ### Integration
 
-Now that our project is setup, it's time to integrate Wallet Connect. To do so, we will leverage React Context, to create a reusable component that will be accessible in all components of the application.
-
-In your terminal window from the root directory, past the following.
+Now that our project is setup, it's time to integrate Wallet Connect. Open the index file in the pages directory, we will start by the dependencies and the constants
 
 ```
-mkdir providers
-cd providers
-mkdir wallet-connect
-cd wallet-connect
-touch index.js
-
-```
-Now on your favoride IDE (VSCode), open the index.js file in wallet-connect folder.
-
-We will start by the dependencies and the constants
-
-```
-import { createContext, useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Client from "@walletconnect/sign-client";
 import QRCodeModal from "@walletconnect/legacy-modal";
 import { ERROR } from "@walletconnect/utils";
@@ -71,37 +52,21 @@ const DEFAULT_APP_METADATA = {
 };
 
 const TERNOA_ALPHANET_CHAIN = "ternoa:18bcdb75a0bba577b084878db2dc2546";
-
+const RELAY_URL = "wss://wallet-connectrelay.ternoa.network/";
+const PROJECT_ID = "" // Get your project id by applying to the form, link in the introduction
 const requiredNamespaces = {
   ternoa: {
     chains: [TERNOA_ALPHANET_CHAIN],
-    events: ["event_test"],
-    methods: ["sign_message"],
+    events: ["event_test"], // events that we will use, each project implements events according to the business logic
+    methods: ["sign_message"], // methods that we will use, each project implements methods according to the business logic
   },
 };
 ```
 
-Bellow we will create the context and the provider component
+Within the Home component, we add the state variable
 
 ```
-export const WalletConnectClientContext = createContext();
-
-export const WalletConnectClientContextProvider = ({ children }) => {
-
-  return (
-    <WalletConnectClientContext.Provider
-      value={{}}
-    >
-      {children}
-    </WalletConnectClientContext.Provider>
-}
-
-```
-
-Within the WalletConnectClientContextProvider component, we add the state variable
-
-```
-export const WalletConnectClientContextProvider = ({ children }) => {
+export default function Home() {
 
   const [client, setClient] = useState(null);
   const [pairings, setPairings] = useState(null);
@@ -130,8 +95,8 @@ Initializing Wallet Connect client
     try {
       setIsInitializing(true);
       const _client = await Client.init({
-        relayUrl: "wss://wallet-connectrelay.ternoa.network/",
-        projectId: "e8f6f7d41ff88cd96a21ce580f018401",
+        relayUrl: RELAY_URL,
+        projectId: PROJECT_ID,
         metadata: DEFAULT_APP_METADATA,
       });
 
@@ -155,9 +120,6 @@ Initializing Wallet Connect client
 Subscribe to the events
 
 ```
-
-  ...
-  const createClient = useCallback(async () => {
   ...
 
   const subscribeToEvents = useCallback(
@@ -165,19 +127,23 @@ Subscribe to the events
       if (typeof _client === "undefined") {
         throw new Error("WalletConnect is not initialized");
       }
+      // here we can use several type of events, predefined in the Wallect Connect document
       _client.on("session_update", ({ topic, params }) => {
         const { namespaces } = params;
         const _session = _client.session.get(topic);
         const updatedSession = { ..._session, namespaces };
         onSessionConnected(updatedSession);
       });
+      _client.on("session_event", ({ event }) => {
+        // Handle session events, such as "chainChanged", "accountsChanged", etc.
+      });
       _client.on("session_delete", () => {
+        // Session was deleted -> reset the dapp state, clean up from user session, etc.
         reset();
       });
     },
     [onSessionConnected]
   );
-
   ...
 
 ```
@@ -185,9 +151,6 @@ Subscribe to the events
 Restore previous session and pairings if any
 
 ```
-
-  ...
-  const subscribeToEvents = useCallback(
   ...
 
   const checkPersistedState = useCallback(
@@ -195,13 +158,9 @@ Restore previous session and pairings if any
       if (typeof _client === "undefined") {
         throw new Error("WalletConnect is not initialized");
       }
-
-      // populates existing pairings to state
       setPairings(_client.pairing.values);
 
       if (typeof session !== "undefined") return;
-
-      // populates (the last) existing session to state
 
       if (_client.session.length) {
         const lastKeyIndex = _client.session.keys.length - 1;
@@ -218,10 +177,8 @@ Restore previous session and pairings if any
   ...
 ```
 
-When the session is connected we call 
+When the session is connected we call onSessionConnected to change the dapp state accordingly
 ```
-  ...
-  const checkPersistedState = useCallback(
   ...
 
   const onSessionConnected = useCallback((_session) => {
@@ -231,14 +188,12 @@ When the session is connected we call
       .split(":")[2];
     setSession(_session);
     setAddress(_pubKey);
-    console.log("connected _session", _session);
-    console.log("connected _pubKey", _pubKey);
   });
 
   ...
 ```
 
-Now we're all set for initializing Wallet Connect, and connecting if a previous session existed. Next step will be to connect, disconnect and sign a message.
+Now we're all set for Wallet Connect initialization. The next step will be to connect, disconnect and sign a message.
 
 Connection
 ```
@@ -256,6 +211,7 @@ Connection
         if (uri) {
           QRCodeModal.open(uri);
         }
+        // Here we will await the Wallet's response to the pairing proposal
         const session = await approval();
         onSessionConnected(session);
       } catch (e) {
@@ -296,3 +252,58 @@ Disconnection
 ```
 
 Signing a message
+
+```
+  ...
+
+  const signMessage = useCallback(async () => {
+    if (typeof client === "undefined") {
+       throw new Error("WalletConnect is not initialized");
+    }
+    setIsLoading(true);
+
+    // This could be any message, but will be rejected by the Wallet if it is a transaction hash
+    const message = "Confirm Account";
+
+    await client.request({
+      chainId: TERNOA_ALPHANET_CHAIN,
+      topic: session.topic,
+      request: {
+        method: "sign_message",
+        params: {
+          pubKey: address,
+          request: {
+            message,
+          },
+        },
+      },
+    })
+    .then(async (response) => {
+      const responseObj = JSON.parse(response);
+
+      // The method to verify the signature uses WASM librairies under the hood, so we have to make sure that they are all available before proceeding
+      await cryptoWaitReady();
+      const isValid = isValidSignaturePolkadot(
+        message,
+        responseObj.signedMessageHash,
+        address
+      );
+
+      setIsAccountCertified(isValid);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      setIsLoading(false);
+    });
+  }, [client, session, address]);
+
+  const isValidSignaturePolkadot = (signedMessage, signature, address) => {
+    const publicKey = decodeAddress(address);
+    const hexPublicKey = u8aToHex(publicKey);
+    return signatureVerify(signedMessage, signature, hexPublicKey).isValid;
+  };
+
+  ...
+```

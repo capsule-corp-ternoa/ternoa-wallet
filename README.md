@@ -15,7 +15,8 @@ This documentation is aimed at helping developers who create dApps leveraging th
 Please find bellow some ressources that will help you with the integration:
 - [Tutorial](./wallet-connect-integration/TUTORIAL.md): a step-by-step guide
 - [dApp-exemple](./wallet-connect-integration/dapp-exemple): a boilerplate app
-- [QR Scan, Deeplink and Webview](./wallet-connect-integration/): The 3 different ways to connect
+- [QR Scan, Deeplink and Webview](./wallet-connect-integration/CONNECTION.md): The 3 different ways to connect
+- [Transaction request object](./wallet-connect-integration/REQUEST.md)
 
 ## Issues
 
