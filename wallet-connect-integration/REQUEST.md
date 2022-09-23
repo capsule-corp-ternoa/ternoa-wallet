@@ -16,7 +16,7 @@ The request object contains 5 keys, based on your business requirments, not all 
 }
 ```
 
-#### Exemple 1
+#### Example 1
 Sign a message
 
 ```
@@ -25,7 +25,7 @@ Sign a message
   }
 ```
 
-#### Exemple 2
+#### Example 2
 Transaction to be signed and submited in the Wallet
 
 ```
@@ -35,7 +35,7 @@ Transaction to be signed and submited in the Wallet
   }
 ```
 
-#### Exemple 3
+#### Example 3
 Transaction to be signed and returned to the dApp
 
 ```
@@ -45,7 +45,7 @@ Transaction to be signed and returned to the dApp
   }
 ```
 
-#### Exemple 4
+#### Example 4
 Transaction to be signed and submited in the Wallet, with custom nonce
 
 Unique value that will lock the transaction execution to a single submission, the default value of nonce is -1, which corresponds to the next available nonce.
@@ -58,7 +58,7 @@ Unique value that will lock the transaction execution to a single submission, th
   }
 ```
 
-#### Exemple 5
+#### Example 5
 Transaction to be signed and submited in the Wallet, with custom validity
 
 Number of blocks for which the transaction can be submitted, the default value of validity is 0, which corresponds immortal.

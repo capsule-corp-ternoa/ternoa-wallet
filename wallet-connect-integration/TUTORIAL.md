@@ -11,7 +11,7 @@ Let's get started with creating the project and installing the necessary depende
 
 Open a terminal window and run this command to create your NextJS project
 ```
-npx create-next-app@latest dapp-exemple && cd dapp-exemple
+npx create-next-app@latest dapp-example && cd dapp-example
 ```
 In the package.json file of your recently created project, copy and past the following. This will make sure that we always use the same version of WalletConnect.
 ```
@@ -57,8 +57,8 @@ import {
 import { u8aToHex } from "@polkadot/util";
 
 const DEFAULT_APP_METADATA = {
-  name: "dApp exemple",
-  description: "dApp exemple",
+  name: "dApp example",
+  description: "dApp example",
   url: "https://ternoa.com",
   icons: ["https://www.ternoa.com/favicon.ico"],
 };

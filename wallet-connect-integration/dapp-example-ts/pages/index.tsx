@@ -12,8 +12,8 @@ import {
 import { u8aToHex } from "@polkadot/util";
 
 const DEFAULT_APP_METADATA = {
-  name: "dApp exemple",
-  description: "dApp exemple",
+  name: "dApp example",
+  description: "dApp example",
   url: "https://ternoa.com",
   icons: ["https://www.ternoa.com/favicon.ico"],
 };

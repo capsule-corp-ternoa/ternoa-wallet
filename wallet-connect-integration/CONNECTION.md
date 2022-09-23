@@ -5,14 +5,14 @@
 
 ### Deeplink
 
-Exemple
+Example
 ```
 ternoa-wallet://wc?uri=<wallet-connect-ui>
 ```
 
 ### QR Scan
 
-Exemple
+Example
 ```
   import QRCodeModal from "@walletconnect/legacy-modal";
 
@@ -25,7 +25,7 @@ Exemple
 
 Ternoa Wallet injects an isTernoaWallet boolean in webview, this boolean will be user to defect that this is a webview
 
-Exemple
+Example
 ```
 const isTernoaWallet = (window as any).isTernoaWallet;
 if (isTernoaWallet) {
