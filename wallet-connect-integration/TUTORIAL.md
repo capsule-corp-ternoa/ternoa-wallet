@@ -9,14 +9,11 @@ Pre-requist: In this tutorial, we assume that you are familiar with es6. We will
 
 Let's get started with creating the project and installing the necessary dependecies.
 
-Open a terminal window and past the following.
+Open a terminal window and run this command to create your NextJS project
 ```
-npx create-next-app@latest dapp-exemple
-cd dapp-exemple
-npm install @walletconnect/sign-client@2.0.0-beta.100 @walletconnect/legacy-modal@2.0.0-beta.100 better-sqlite3 @polkadot/util-crypto @polkadot/util
+npx create-next-app@latest dapp-exemple && cd dapp-exemple
 ```
-
-In the package.json file and past the following. This will make sure that we always use the same version.
+In the package.json file of your recently created project, copy and past the following. This will make sure that we always use the same version of WalletConnect.
 ```
 "overrides": {
     "@walletconnect/sign-client": "2.0.0-beta.100",
@@ -27,6 +24,13 @@ In the package.json file and past the following. This will make sure that we alw
   },
 
 ```
+
+Run the following commands to install the necessary dependencies
+
+```
+npm install @walletconnect/sign-client@2.0.0-beta.100 @walletconnect/legacy-modal@2.0.0-beta.100 better-sqlite3 @polkadot/util-crypto @polkadot/util
+```
+
 
 Make sure that you have `swcMinify` disabled on your `next.config.js` file:
 ```
