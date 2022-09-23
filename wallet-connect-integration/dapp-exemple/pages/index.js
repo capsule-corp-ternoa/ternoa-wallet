@@ -164,8 +164,8 @@ export default function Home() {
 
     const message = "Confirm Account";
 
-    await client
-      .request({
+    try {
+      const response = await client.request({
         chainId: TERNOA_ALPHANET_CHAIN,
         topic: session.topic,
         request: {
@@ -177,24 +177,20 @@ export default function Home() {
             },
           },
         },
-      })
-      .then(async (response) => {
-        const responseObj = JSON.parse(response);
-
-        await cryptoWaitReady();
-        const isValid = isValidSignaturePolkadot(
-          message,
-          responseObj.signedMessageHash,
-          address
-        );
-        setIsAccountCertified(isValid);
-      })
-      .catch(() => {
-        console.log("ERROR: invalid signature");
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
+      const responseObj = JSON.parse(response);
+      await cryptoWaitReady();
+      const isValid = isValidSignaturePolkadot(
+        message,
+        responseObj.signedMessageHash,
+        address
+      );
+      setIsAccountCertified(isValid);
+    } catch {
+      console.log("ERROR: invalid signature");
+    } finally {
+      setIsLoading(false);
+    }
   }, [client, session, address]);
 
   const isValidSignaturePolkadot = (signedMessage, signature, address) => {
