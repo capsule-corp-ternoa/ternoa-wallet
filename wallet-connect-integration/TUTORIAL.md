@@ -28,6 +28,14 @@ In the package.json file and past the following. This will make sure that we alw
 
 ```
 
+Make sure that you have `swcMinify` disabled on your `next.config.js` file:
+```
+const nextConfig = {
+  swcMinify: false,
+  ...
+}
+```
+
 ### Integration
 
 Now that our project is setup, it's time to integrate Wallet Connect. Open the index file in the pages directory, we will start by the dependencies and the constants
