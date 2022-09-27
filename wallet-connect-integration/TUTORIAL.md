@@ -64,6 +64,7 @@ const DEFAULT_APP_METADATA = {
 };
 
 const TERNOA_ALPHANET_CHAIN = "ternoa:18bcdb75a0bba577b084878db2dc2546";
+// For mainnet => ternoa:6859c81ca95ef624c9dfe4dc6e3381c3
 const RELAY_URL = "wss://wallet-connectrelay.ternoa.network/";
 const PROJECT_ID = "" // Get your project id by applying to the form, link in the introduction
 const requiredNamespaces = {
