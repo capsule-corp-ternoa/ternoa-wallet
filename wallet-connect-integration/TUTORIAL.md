@@ -1,19 +1,25 @@
 ## Introduction
 
-This is a step-by-step tutorial on how to integrate Wallet Connect to your dApp, to connect all dApps powered by **Ternoa** ecosystem to **Ternoa Wallet**.
+This is a step-by-step tutorial on how to integrate and connect all Dapps powered by the **Ternoa** ecosystem to the **Ternoa Wallet**.
 
-Pre-requist: In this tutorial, we assume that you are familiar with es6. We will also use next.js with React.js, but no experience in the latter 2 is required.
+#### Pre-requisites: 
+
+We assume you're familiar with `es6`.
+
+We'll also use `next.js` with `React.js` but no particular experience in these two is required.
 
 
 ### Project setup
 
 Let's get started with creating the project and installing the necessary dependecies.
 
-Open a terminal window and run this command to create your NextJS project
+Open a terminal window and run this command to create your Next.js project :
+
 ```
 npx create-next-app@latest dapp-example && cd dapp-example
 ```
-In the package.json file of your recently created project, copy and past the following. This will make sure that we always use the same version of WalletConnect.
+In the package.json file of your recently created project, copy and past the following. This will make sure that we always use the same version of `WalletConnect` :
+
 ```
 "overrides": {
     "@walletconnect/sign-client": "2.0.0-beta.100",
@@ -25,14 +31,15 @@ In the package.json file of your recently created project, copy and past the fol
 
 ```
 
-Run the following commands to install the necessary dependencies
+Run the following commands to install the necessary dependencies :
 
 ```
 npm install @walletconnect/sign-client@2.0.0-beta.100 @walletconnect/legacy-modal@2.0.0-beta.100 better-sqlite3 @polkadot/util-crypto @polkadot/util
 ```
 
 
-Make sure that you have `swcMinify` disabled on your `next.config.js` file:
+Make sure to have `swcMinify` disabled within your `next.config.js` file :
+
 ```
 const nextConfig = {
   swcMinify: false,
@@ -42,7 +49,9 @@ const nextConfig = {
 
 ### Integration
 
-Now that our project is setup, it's time to integrate Wallet Connect. Open the index file in the pages directory, we will start by the dependencies and the constants
+Now that our project is set up, it's time to integrate Wallet Connect.
+
+##### Open the index file in the pages directory, we will start by the dependencies and the constants :
 
 ```
 import { useCallback, useState, useEffect } from "react";
@@ -75,7 +84,7 @@ const requiredNamespaces = {
 };
 ```
 
-Within the Home component, we add the state variable
+#### Add the state variable within the Home component :
 
 ```
 export default function Home() {
@@ -91,7 +100,7 @@ export default function Home() {
   ...
 ```
 
-Initializing Wallet Connect client
+#### Initialize the Wallet Connect client :
 
 ```
   ...
@@ -129,7 +138,7 @@ Initializing Wallet Connect client
   ...
 ```
 
-Subscribe to the events
+#### Subscribe to the events :
 
 ```
   ...
@@ -160,7 +169,7 @@ Subscribe to the events
 
 ```
 
-Restore previous session and pairings if any
+#### Restore previous session or pairings, if any :
 
 ```
   ...
@@ -189,7 +198,7 @@ Restore previous session and pairings if any
   ...
 ```
 
-When the session is connected we call onSessionConnected to change the dapp state accordingly
+##### Call `onSessionConnected` when the session is connected to change the dapp state accordingly :
 ```
   ...
 
@@ -205,9 +214,10 @@ When the session is connected we call onSessionConnected to change the dapp stat
   ...
 ```
 
-Now we're all set for Wallet Connect initialization. The next step will be to connect, disconnect and sign a message.
+**Now we're all set for Wallet Connect initialization. The next step will be to connect, disconnect and sign a message.**
 
-Connection
+#### Connection :
+
 ```
   ...
   const connect = useCallback(
@@ -237,7 +247,8 @@ Connection
   ...
 ```
 
-Disconnection
+#### Disconnection :
+
 ```
   ...
   const disconnect = useCallback(async () => {
@@ -263,7 +274,7 @@ Disconnection
   ...
 ```
 
-Signing a message
+### Signing a message :
 
 ```
   ...
