@@ -4,7 +4,7 @@
 
 **Ternoa is a Decentralised, Open source, NFT-centric Layer 1 blockchain that is multi-chain by design and aims to provide a technical stack to build scalable and secure NFTs with native support for advanced features.**
 
-**Ternoa Wallet** is a non-custodial crypto wallet created and maintaned by **Ternoa**. Its built on top of the Ternoa ecosystem using Poljadot.js and React-Native which allows users to manage their assets, i.e. $CAPS and NFTs on both the Mainnet and Alphanet networks.
+**Ternoa Wallet** is a non-custodial crypto wallet created and maintaned by **Ternoa**. Its built on top of the Ternoa ecosystem using Polkadot.js and React-Native which allows users to manage their assets, i.e. $CAPS and NFTs on both the Mainnet and Alphanet networks.
 
 The Ternoa Wallet is available on :
 - [iOS](https://apps.apple.com/us/app/ternoa-wallet/id1562180877)
