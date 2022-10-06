@@ -6,3 +6,5 @@ Run the development server:
 npm install
 npm run dev
 ```
+
+**That's All Folks**

@@ -1,10 +1,12 @@
 ## Introduction
 
-There are multiple ways to interact with **Ternoa Wallet**, when it comes to sending a request via Wallet Connect.
+There are multiple ways to interact with **Ternoa Wallet** when it comes to sending a request via Wallet Connect.
 
 ### Request object
 
-The request object contains 5 keys, based on your business requirments, not all the keys are required, bellow a list of use cases.
+The request object contains 5 keys based on your business requirements although not all the keys are required.
+
+We've compiled a list of use cases below :
 
 ```
  {
@@ -16,8 +18,9 @@ The request object contains 5 keys, based on your business requirments, not all 
 }
 ```
 
-#### Example 1
-Sign a message
+#### Example 1 :
+
+**Sign a message**
 
 ```
   const request = {
@@ -25,8 +28,9 @@ Sign a message
   }
 ```
 
-#### Example 2
-Transaction to be signed and submited in the Wallet
+#### Example 2 :
+
+**Transaction to be signed and submited in the Wallet**
 
 ```
   const request = {
@@ -35,8 +39,9 @@ Transaction to be signed and submited in the Wallet
   }
 ```
 
-#### Example 3
-Transaction to be signed and returned to the dApp
+#### Example 3 :
+
+**Transaction to be signed and returned to the dApp**
 
 ```
   const request = {
@@ -45,10 +50,11 @@ Transaction to be signed and returned to the dApp
   }
 ```
 
-#### Example 4
-Transaction to be signed and submited in the Wallet, with custom nonce
+#### Example 4 :
 
-Unique value that will lock the transaction execution to a single submission, the default value of nonce is -1, which corresponds to the next available nonce.
+**Transaction to be signed and submited in the Wallet, with a custom nonce**
+
+A Unique value that will lock the transaction execution to a single submission, its default value is -1, which corresponds to the next available nonce.
 
 ```
   const request = {
@@ -59,9 +65,10 @@ Unique value that will lock the transaction execution to a single submission, th
 ```
 
 #### Example 5
-Transaction to be signed and submited in the Wallet, with custom validity
 
-Number of blocks for which the transaction can be submitted, the default value of validity is 0, which corresponds immortal.
+**Transaction to be signed and submited in the Wallet, with custom validity**
+
+Number of blocks for which the transaction can be submitted, the default value of validity is 0, i.e. immortal.
 
 ```
   const request = {
