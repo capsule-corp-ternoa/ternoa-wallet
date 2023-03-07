@@ -8,7 +8,7 @@ The request object contains 5 keys, based on your business requirments, not all 
 
 ```
  {
-  txHash?: string, // transaction hash, not necessary if you are signing a message
+  hash?: string, // transaction hash, not necessary if you are signing a message
   nonce?: number, // transaction nonce, not necessary if you are signing a message
   validity?: number, // transaction validity period, not necessary if you are signing a message
   submit?: boolean, // true if the transaction is to be submitted from the wallet, false if you want to receive a signed transaction back to the dApp, not necessary if you are signing a message
@@ -30,7 +30,7 @@ Transaction to be signed and submited in the Wallet
 
 ```
   const request = {
-    txHash: 'Your transaction hash',
+    hash: 'Your transaction hash',
     submit: true
   }
 ```
@@ -40,7 +40,7 @@ Transaction to be signed and returned to the dApp
 
 ```
   const request = {
-    txHash: 'Your transaction hash',
+    hash: 'Your transaction hash',
     submit: false
   }
 ```
@@ -52,7 +52,7 @@ Unique value that will lock the transaction execution to a single submission, th
 
 ```
   const request = {
-    txHash: 'Your transaction hash',
+    hash: 'Your transaction hash',
     submit: true,
     nonce: -1,
   }
@@ -65,7 +65,7 @@ Number of blocks for which the transaction can be submitted, the default value o
 
 ```
   const request = {
-    txHash: 'Your transaction hash',
+    hash: 'Your transaction hash',
     submit: true,
     validity: 0
   }
